@@ -1,0 +1,8 @@
+Program Example1; (* Example 1 *)
+#define MAX 100
+Begin
+	FOR (1,100)
+          CALL  WRITEC(' ');
+        
+
+End. (* Example 1 *)
