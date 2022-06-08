@@ -1,3 +1,8 @@
 # Compiled program
 *.exe
 *.out
+*.o
+*.log
+
+# vscode setting
+.vscode
