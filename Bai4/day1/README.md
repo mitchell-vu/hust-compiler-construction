@@ -27,7 +27,7 @@ mingw32-make
 ./symtab.exe
 ```
 
-Chương trình sẽ in ra một symbol table có cấu trúc như ở [outcome](#outcome--day-1)
+Chương trình sẽ in ra một symbol table có cấu trúc như ở [outcome](#outcome---day-1)
 
 ## About Semantics Analysis
 
