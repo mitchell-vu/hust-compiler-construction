@@ -155,7 +155,7 @@ struct ConstantAttributes_ {
 
 struct VariableAttributes_ {
     Type *type;
-    // Phạm vi của biến (sử dụng cho pha sinh mã)
+    // Phạm vi của biến (sử dụng cho phase sinh mã)
     struct Scope_ *scope;
 };
 
@@ -187,6 +187,14 @@ struct ProgramAttributes_ {
 ```
 
 ### Tạo object
+
+Khi tạo object thì sẽ gắn một object:
+
+- Kind: `OBJ_CONSTANT`/`OBJ_TYPE`/`OBJ_VARIABLE`/...
+- Attribute: `constAttrs`/`typeAttrs`/`varAttrs`/...
+- Scope: Đối với Variable, Func/Proc
+- Param List: Cho Func/Proc (Param cũng là một object)
+-> Param cần gắn thêm `owner`
 
 ```c
 Object* createConstantObject(char *name);
