@@ -315,6 +315,18 @@ void exitBlock(void) {
 
 Object* lookupObject(char *name) {
   // TODO
+  Scope *currentScope = symtab->currentScope;
+  Object *obj = NULL;
+  while (currentScope != NULL) {
+    obj = findObject(currentScope->objList, name);
+    if (obj != NULL) {
+      return obj;
+    }
+    currentScope = currentScope->outer;
+  }
+
+  obj = findObject(symtab->globalObjectList, name);
+  return obj;
 }
 
 void declareObject(Object* obj) {
