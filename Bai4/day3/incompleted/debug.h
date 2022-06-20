@@ -5,7 +5,7 @@
  */
 
 #ifndef __DEBUG_H__
-#define __DEBUG_H_
+#define __DEBUG_H__
 
 #include "symtab.h"
 
