@@ -1,0 +1,14 @@
+Program Midterm; (* Difference *)
+   
+Var m : Integer;
+    n : Integer;
+    RES: Integer;
+
+Begin
+  m := ReadI;
+  n := ReadI;
+
+  If n > m Then RES := n - m Else RES := m - n;
+
+  Call WriteI(RES);
+End. (* Difference *)
