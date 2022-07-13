@@ -21,30 +21,55 @@ CodeBlock* codeBlock;
 
 int computeNestedLevel(Scope* scope) {
   // TODO
+  int level = 0;
+  Scope* tmp = symtab->currentScope;
+  while (tmp != scope) {
+    tmp = tmp->outer;
+    level ++;
+  }
+  return level;
 }
 
 void genVariableAddress(Object* var) {
   // TODO
+  int level = computeNestedLevel(VARIABLE_SCOPE(var));
+  int offset = VARIABLE_OFFSET(var);
+  genLA(level, offset);
 }
 
 void genVariableValue(Object* var) {
   // TODO
+  int level = computeNestedLevel(VARIABLE_SCOPE(var));
+  int offset = VARIABLE_OFFSET(var);
+  genLV(level, offset);
 }
 
 void genParameterAddress(Object* param) {
   // TODO
+  int level = computeNestedLevel(PARAMETER_SCOPE(param));
+  int offset = PARAMETER_OFFSET(param);
+  genLA(level, offset);
 }
 
 void genParameterValue(Object* param) {
   // TODO
+  int level = computeNestedLevel(PARAMETER_SCOPE(param));
+  int offset = PARAMETER_OFFSET(param);
+  genLV(level, offset);
 }
 
 void genReturnValueAddress(Object* func) {
   // TODO
+  int level = computeNestedLevel(FUNCTION_SCOPE(func));
+  int offset = RETURN_VALUE_OFFSET;
+  genLA(level, offset);
 }
 
 void genReturnValueValue(Object* func) {
   // TODO
+  int level = computeNestedLevel(FUNCTION_SCOPE(func));
+  int offset = RETURN_VALUE_OFFSET;
+  genLV(level, offset);
 }
 
 void genPredefinedProcedureCall(Object* proc) {
@@ -58,6 +83,8 @@ void genPredefinedProcedureCall(Object* proc) {
 
 void genProcedureCall(Object* proc) {
   // TODO
+  int level = computeNestedLevel(proc->procAttrs->scope->outer);
+  genCALL(level, proc->procAttrs->codeAddress);
 }
 
 void genPredefinedFunctionCall(Object* func) {
@@ -69,6 +96,8 @@ void genPredefinedFunctionCall(Object* func) {
 
 void genFunctionCall(Object* func) {
   // TODO
+  int level = computeNestedLevel(func->funcAttrs->scope->outer);
+  genCALL(level, func->funcAttrs->codeAddress);
 }
 
 void genLA(int level, int offset) {

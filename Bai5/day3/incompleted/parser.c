@@ -422,10 +422,15 @@ Type* compileLValue(void) {
   case OBJ_PARAMETER:
     // TODO: push parameter value onto stack if the parameter is a reference (defined with keyword VAR
     //       push parameter address onto stack if the parameter is a value
+    if (var->paramAttrs->kind == PARAM_VALUE)
+      genParameterAddress(var);
+    else genParameterValue(var);
+
     varType = var->paramAttrs->type;
     break;
   case OBJ_FUNCTION:
     // TODO: push the return value address onto the stack
+    genReturnValueAddress(var);
     varType = var->funcAttrs->returnType;
     break;
   default: 
@@ -462,7 +467,10 @@ void compileCallSt(void) {
     compileArguments(proc->procAttrs->paramList);
     genPredefinedProcedureCall(proc);
   } else {
+    genINT(RESERVED_WORDS);
     compileArguments(proc->procAttrs->paramList);
+    genDCT( RESERVED_WORDS + proc->procAttrs->paramCount);
+    genProcedureCall(proc);
   }
 }
 
@@ -857,16 +865,20 @@ Type* compileFactor(void) {
       }
       break;
     case OBJ_PARAMETER:
-      // TODO: push parameter's value onto the stack
       type = obj->paramAttrs->type;
+      genParameterValue(obj);
+      if (obj->paramAttrs->kind == PARAM_REFERENCE)
+	genLI();
       break;
     case OBJ_FUNCTION:
-      // TODO: generate function call
       if (isPredefinedFunction(obj)) {
 	compileArguments(obj->funcAttrs->paramList);
 	genPredefinedFunctionCall(obj);
       } else {
+	genINT(4);
 	compileArguments(obj->funcAttrs->paramList);
+	genDCT(4+obj->funcAttrs->paramCount);
+	genFunctionCall(obj);
       }
       type = obj->funcAttrs->returnType;
       break;
@@ -888,7 +900,6 @@ Type* compileFactor(void) {
 }
 
 Type* compileIndexes(Type* arrayType) {
-  // TODO: Generate code for computing array element address
   Type* type;
 
   
@@ -897,6 +908,10 @@ Type* compileIndexes(Type* arrayType) {
     type = compileExpression();
     checkIntType(type);
     checkArrayType(arrayType);
+
+    genLC(sizeOfType(arrayType->elementType));
+    genML();
+    genAD();
 
     arrayType = arrayType->elementType;
     eat(SB_RSEL);
