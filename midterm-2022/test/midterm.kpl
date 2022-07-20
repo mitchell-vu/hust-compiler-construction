@@ -1,0 +1,21 @@
+Program Midterm; (* FIND MAX *)
+   
+Var N : Integer;
+    I : Integer;
+    A : Array(. 100 .) of Integer;
+    MAX: Integer;
+
+Begin
+  N := ReadI; (* Enter Array length *)
+  If N > 0 Then
+    Begin
+      MAX := ReadI; (* Read first element *)
+      For I := 2 To N Do 
+        Begin
+          A(.I.) := ReadI;
+          If A(.I.) > MAX Then MAX := A(.I.)
+        End;
+      Call WriteLn;
+      Call WriteI(MAX);
+    End;
+End. (* FIND MAX *)

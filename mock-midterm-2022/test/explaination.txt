@@ -1,0 +1,37 @@
+0:  J 1       (Jump) ??
+1:  INT 7     (Increment T) ??
+
+<BEGIN>
+
+2:  LA 0,4    (Load address của m)
+3:  RI        (Read Int m)
+4:  ST        (Store m)
+5:  LA 0,5    (Load address của n)
+6:  RI        (Read Int n)
+7:  ST        (Store n)
+
+<IF>
+8:  LV 0,5    (Load Value n)
+9:  LV 0,4    (Load Value m)
+10:  GT       (Greater than) (n > m)
+<THEN>
+11:  FJ 18    (False Jump)
+12:  LA 0,6   (Load Address)
+13:  LV 0,5   (Load Value)
+14:  LV 0,4   (Load Value)
+15:  SB       (Subtract)
+16:  ST       (Store)
+<ELSE>
+17:  J 23     (Jump)
+18:  LA 0,6   (Load Address)
+19:  LV 0,4   (Load Value)
+20:  LV 0,5   (Load Value)
+21:  SB       (Subtract)
+22:  ST       (Store)
+
+<CALL>
+23:  LV 0,6   (Load Value)
+24:  WRI      (Write Int)
+
+<END>
+25:  HL       (Halt)
