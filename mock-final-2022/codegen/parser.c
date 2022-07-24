@@ -760,14 +760,19 @@ Type* compileExpression3(Type* argType1) {
   }
   return resultType;
 }
-
+// Sửa tại đây thành Term := Factor0 term2
 Type* compileTerm(void) {
   Type* type;
-  type = compileFactor();
+  type = compileFactor0();
   type = compileTerm2(type);
 
   return type;
 }
+
+// Sửa thành:
+// Term2 ::= SB_TIMES Factor0 Term2
+// Term2 ::= SB_SLASH Factor0 Term2
+// Term2 ::= epsilon
 
 Type* compileTerm2(Type* argType1) {
   Type* argType2;
@@ -777,7 +782,7 @@ Type* compileTerm2(Type* argType1) {
   case SB_TIMES:
     eat(SB_TIMES);
     checkIntType(argType1);
-    argType2 = compileFactor();
+    argType2 = compileFactor0();
     checkIntType(argType2);
 
     genML();
@@ -787,7 +792,7 @@ Type* compileTerm2(Type* argType1) {
   case SB_SLASH:
     eat(SB_SLASH);
     checkIntType(argType1);
-    argType2 = compileFactor();
+    argType2 = compileFactor0();
     checkIntType(argType2);
 
     genDV();
@@ -818,6 +823,58 @@ Type* compileTerm2(Type* argType1) {
     error(ERR_INVALID_TERM, lookAhead->lineNo, lookAhead->colNo);
   }
   return resultType;
+}
+
+// Thêm hàm compileFactor2()
+Type* compileFactor2(Type* type1) {
+  Type *type2;
+  Type *restype;
+  switch (lookAhead->tokenType)
+  {
+  case SB_POWER:
+    eat(SB_POWER);
+    checkIntType(type1);
+    type2 = compileFactor();
+    checkIntType(type2);
+    genPW();
+    restype = compileFactor2(type1);
+    break;
+  // check the FOLLOW set
+  case SB_TIMES:
+  case SB_SLASH:
+  case SB_PLUS:
+  case SB_MINUS:
+  case KW_TO:
+  case KW_DO:
+  case SB_RPAR:
+  case SB_COMMA:
+  case SB_EQ:
+  case SB_NEQ:
+  case SB_LE:
+  case SB_LT:
+  case SB_GE:
+  case SB_GT:
+  case SB_RSEL:
+  case SB_SEMICOLON:
+  case KW_END:
+  case KW_ELSE:
+  case KW_THEN:
+    restype = type1;
+    break;
+  default:
+    printf("Error compile factor2: ln:%d,cl: %d\n",lookAhead->lineNo, lookAhead->colNo);
+    exit(0);
+    break;
+  }
+  return restype;
+}
+
+// Thêm hàm compileFactor0()
+Type* compileFactor0() {
+  Type* type;
+  type = compileFactor();
+  type = compileFactor2(type);
+  return type;
 }
 
 Type* compileFactor(void) {

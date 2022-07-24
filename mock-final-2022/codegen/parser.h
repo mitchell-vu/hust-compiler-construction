@@ -52,6 +52,8 @@ Type* compileExpression3(Type* argType1);
 Type* compileTerm(void);
 Type* compileTerm2(Type* argType2);
 Type* compileFactor(void);
+Type* compileFactor2(Type *type);
+Type* compileFactor0(void);
 Type* compileIndexes(Type* arrayType);
 
 int compile(char *fileName);

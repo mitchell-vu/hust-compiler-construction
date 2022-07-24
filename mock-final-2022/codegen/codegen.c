@@ -187,6 +187,9 @@ void genSB(void) {
 void genML(void) {
   emitML(codeBlock);
 }
+void genPW(void) {
+  emitPW(codeBlock);
+}
 
 void genDV(void) {
   emitDV(codeBlock);

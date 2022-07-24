@@ -1,0 +1,13 @@
+Program Midterm; (* Power of 2 *)
+   
+Var N : Integer;
+    I : Integer;
+    POW: Integer;
+
+Begin
+    N := ReadI;
+    POW := 1;
+    For I := 1 To N Do POW := POW * 2;
+
+    Call WriteI(POW);
+End. (* Power of 2 *)

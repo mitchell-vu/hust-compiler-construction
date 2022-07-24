@@ -56,6 +56,8 @@ int emitWLN(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_WLN, DC_VALUE,
 int emitAD(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_AD, DC_VALUE, DC_VALUE); }
 int emitSB(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_SB, DC_VALUE, DC_VALUE); }
 int emitML(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_ML, DC_VALUE, DC_VALUE); }
+int emitPW(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_PW, DC_VALUE, DC_VALUE); }
+
 int emitDV(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_DV, DC_VALUE, DC_VALUE); }
 int emitNEG(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_NEG, DC_VALUE, DC_VALUE); }
 int emitCV(CodeBlock* codeBlock) { return emitCode(codeBlock, OP_CV, DC_VALUE, DC_VALUE); }
@@ -92,6 +94,8 @@ void printInstruction(Instruction* inst) {
   case OP_AD: printf("AD"); break;
   case OP_SB: printf("SB"); break;
   case OP_ML: printf("ML"); break;
+  case OP_PW: printf("PW"); break;
+
   case OP_DV: printf("DV"); break;
   case OP_NEG: printf("NEG"); break;
   case OP_CV: printf("CV"); break;
@@ -130,6 +134,8 @@ void sprintInstruction(char* s, Instruction* inst) {
   case OP_AD: sprintf(s,"AD"); break;
   case OP_SB: sprintf(s,"SB"); break;
   case OP_ML: sprintf(s,"ML"); break;
+  case OP_PW: sprintf(s,"PW"); break;
+
   case OP_DV: sprintf(s,"DV"); break;
   case OP_NEG: sprintf(s,"NEG"); break;
   case OP_CV: sprintf(s,"CV"); break;

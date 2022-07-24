@@ -106,6 +106,7 @@ char *tokenToString(TokenType tokenType) {
   case SB_RPAR: return "\')\'";
   case SB_LSEL: return "\'(.\'";
   case SB_RSEL: return "\'.)\'";
+  case SB_POWER: return "\'**\'";
   default: return "";
   }
 }

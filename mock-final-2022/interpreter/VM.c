@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <curses.h>
+#include <math.h>
 
 #include "vm.h"
 
@@ -257,6 +258,14 @@ int run(void) {
 	stack[t] = TRUE;
       else stack[t] = FALSE;
       checkStack();
+      break;
+    case OP_PW:
+      t --;
+      if (checkStack())
+      // printf("%d",stack[t+1]);
+	    stack[t] = pow(stack[t], stack[t+1]);
+      // printf("%d",stack[t]);
+
       break;
     case OP_BP:
       // Just for debugging
