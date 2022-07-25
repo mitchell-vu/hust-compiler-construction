@@ -389,6 +389,9 @@ void compileStatement(void) {
   case KW_FOR:
     compileForSt();
     break;
+  case KW_REPEAT:
+    compileRepeatSt();
+    break;
     // EmptySt needs to check FOLLOW tokens
   case SB_SEMICOLON:
   case KW_END:
@@ -513,6 +516,19 @@ void compileWhileSt(void) {
   compileStatement();
   genJ(beginWhile);
   updateFJ(fjInstruction, getCurrentCodeAddress());
+}
+
+void compileRepeatSt(void) {
+  CodeAddress beginRepeat;
+  Instruction* fjInstruction;
+
+  beginRepeat = getCurrentCodeAddress();
+  
+  eat(KW_REPEAT);
+  compileStatement();
+  eat(KW_UNTIL);
+  compileCondition();
+  fjInstruction = genFJ(beginRepeat);
 }
 
 void compileForSt(void) {
@@ -753,6 +769,7 @@ Type* compileExpression3(Type* argType1) {
   case KW_END:
   case KW_ELSE:
   case KW_THEN:
+  case KW_UNTIL:
     resultType = argType1;
     break;
   default:
@@ -817,6 +834,7 @@ Type* compileTerm2(Type* argType1) {
   case KW_END:
   case KW_ELSE:
   case KW_THEN:
+  case KW_UNTIL:
     resultType = argType1;
     break;
   default:

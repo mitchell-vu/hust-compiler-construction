@@ -1,17 +1,42 @@
-0:  J 1
-1:  INT 6
+0:  J 1         Jump dòng 1
+1:  INT 7       Init stack
 
-2:  LA 0,4      N := ReadI
+2:  LA 0,4      
 3:  RI
-4:  ST
+4:  ST          n := ReadI
 
-5:  LA 0,5      POW := 2 ** N
-6:  LC 2
-7:  LV 0,4
-8:  PW
-9:  ST
+5:  LV 0,4
+6:  LC 0
+7:  GT          n > 0
+8:  FJ 33       (~Else Jump dòng 33)
 
-10:  LV 0,5     WriteI(POW)
-11:  WRI
+9:  LA 0,5
+10:  LC 0
+11:  ST         i := 0
 
-12:  HL         End;
+12:  LA 0,6
+13:  LC 1
+14:  ST         res := 1
+
+15:  LA 0,6
+16:  LV 0,6
+17:  LC 2
+18:  ML
+19:  ST         res := res * 2
+
+20:  LA 0,5
+21:  LV 0,5
+22:  LC 1
+23:  AD
+24:  ST         i := i + 1
+
+25:  LV 0,5
+26:  LV 0,4
+27:  GT         i > n
+28:  FJ 15      (i < n) Jump dòng 15
+
+30:  WLN        WriteLn
+31:  LV 0,6
+32:  WRI
+
+33:  HL

@@ -1,14 +1,25 @@
-Program Midterm; (* Power of 2 *)
-   
-Var N : Integer;
-    POW : Integer;
+Program Example2; (* REPEAT UNTIL statement *)
+
+Var n : Integer;
+    i : Integer;
+    res : Integer;
 
 Begin
-  N := ReadI;
-  If N > 0 Then
-    Begin
-      POW := 2**N;
+    n := ReadI;
+    
+    If n > 0 Then
+      Begin
+        i := 0;
+        res := 1;
 
-      Call WriteI(POW);
-    End;
-End. (* Power of 2 *)
+        REPEAT
+            Begin
+                res := res * 2;
+                i := i + 1;
+            End
+        UNTIL i > n;
+
+        call writeLn;
+        call writeI(res);
+      End;
+End. (* REPEAT UNTIL statement *)

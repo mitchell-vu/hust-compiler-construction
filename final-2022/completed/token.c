@@ -31,7 +31,9 @@ struct {
   {"WHILE", KW_WHILE},
   {"DO", KW_DO},
   {"FOR", KW_FOR},
-  {"TO", KW_TO}
+  {"TO", KW_TO},
+  {"REPEAT", KW_REPEAT},
+  {"UNTIL", KW_UNTIL},
 };
 
 int keywordEq(char *kw, char *string) {
@@ -86,6 +88,8 @@ char *tokenToString(TokenType tokenType) {
   case KW_DO: return "keyword DO";
   case KW_FOR: return "keyword FOR";
   case KW_TO: return "keyword TO";
+  case KW_REPEAT: return "keyword REPEAT";
+  case KW_UNTIL: return "keyword UNTIL";
 
   case SB_SEMICOLON: return "\';\'";
   case SB_COLON: return "\':\'";

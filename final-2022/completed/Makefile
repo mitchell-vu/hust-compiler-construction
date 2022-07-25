@@ -2,7 +2,7 @@ CFLAGS = -c -Wall
 CC = gcc
 LIBS =  -lm 
 
-all: kplc
+all: clean kplc
 
 kplc: main.o parser.o scanner.o reader.o charcode.o token.o error.o symtab.o semantics.o debug.o instructions.o codegen.o
 	${CC} main.o parser.o scanner.o reader.o charcode.o token.o error.o symtab.o semantics.o debug.o instructions.o codegen.o -o kplc
