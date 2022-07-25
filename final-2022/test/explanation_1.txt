@@ -1,0 +1,43 @@
+0:  J 1         Jump tới dòng 1
+1:  INT 7
+
+2:  LA 0,4      N := ReadI;
+3:  RI          
+4:  ST
+
+5:  LA 0,6      POW := 1
+6:  LC 1
+7:  ST
+
+8:  LA 0,5      I := 1
+9:  CV
+10:  LC 1
+11:  ST
+
+12:  CV
+13:  LI
+14:  LV 0,4
+15:  LE         I <= N
+16:  FJ 31      (Else Jump xuống dòng 31)
+
+17:  LA 0,6
+18:  LV 0,6
+19:  LC 2
+20:  ML
+21:  ST         POW := POW * 2
+22:  CV
+23:  CV
+
+24:  LI
+25:  LC 1
+26:  AD
+27:  ST
+28:  CV
+29:  LI
+30:  J 14
+31:  DCT 1
+
+32:  LV 0,6     WriteI(POW)
+33:  WRI
+
+34:  HL         END.

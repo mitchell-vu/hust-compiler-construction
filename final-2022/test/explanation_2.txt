@@ -1,0 +1,17 @@
+0:  J 1
+1:  INT 6
+
+2:  LA 0,4      N := ReadI
+3:  RI
+4:  ST
+
+5:  LA 0,5      POW := 2 ** N
+6:  LC 2
+7:  LV 0,4
+8:  PW
+9:  ST
+
+10:  LV 0,5     WriteI(POW)
+11:  WRI
+
+12:  HL         End;
